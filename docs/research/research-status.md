@@ -25,7 +25,7 @@ implemented. All are currently **open**.
 | RSM specification | Proposed / open | No agreed model, features or thresholds. |
 | Policy composition | Proposed / open | Composition and conflict-resolution semantics not agreed. |
 | Audit integrity | Proposed / open | Guarantees and mechanisms not agreed; no tamper-proof claim is made. |
-| Evaluation plan | Proposed / open | No datasets, metrics or experiments defined. |
+| Evaluation plan | Proposed / open | IBM AML files are present locally but their source revision is unverified; no metrics or experiments defined. |
 
 ## Component status
 
@@ -42,6 +42,7 @@ implemented. All are currently **open**.
 | Audit store / integrity mechanism | Proposed | No hashing, chaining or ledger; no integrity guarantee claimed. |
 | Notification, IAM, dashboards | Proposed | Supporting services only as concepts. |
 | FastAPI transport layer | Proposed | Deliberately not introduced yet. |
+| Dataset-driven evaluation | Proposed | Local sources identified; no experiments designed or run. |
 
 ### Specified
 
@@ -59,14 +60,21 @@ implemented. All are currently **open**.
 | `GovernanceDecision` placeholder | Implemented | Typed placeholder; no autonomy-level logic. |
 | `RiskAssessment` placeholder | Implemented | Typed placeholder; no features or thresholds. |
 | `AuditEvent` placeholder | Implemented | Typed placeholder; no integrity fields or claims. |
-| pytest suite | Implemented | Import checks + placeholder instantiation checks. |
+| pytest suite | Implemented | Import, placeholder-instantiation and data-infrastructure tests using small fixtures. |
 | Ruff configuration and CI workflow | Implemented | uv-based lint, format and test checks run in GitHub Actions using the committed `uv.lock`. |
+| Dataset ingestion infrastructure | Implemented | `src/hitl2/data/`: discovery, format detection, streaming loaders, validation, checksums, reproducible preprocessing; tested with small temporary fixtures. |
+| Dataset provenance registry | Implemented | `data/metadata/datasets.yaml` and `checksums.sha256` record source, version, license and restrictions. |
+| IEEE-CIS download helper | Implemented | Guarded script documents prerequisites; not executed, and no data downloaded. |
+| IBM AML dataset files | Present locally | 18 CSV/TXT files; source revision and retrieval date unverified. Schema, dimensions, labels and semantics not independently validated. |
 
 ### Experimentally validated
 
 | Component | Status | Notes |
 | --- | --- | --- |
-| — | None | No datasets, experiments, metrics or results exist. |
+| — | None | No experiments, metrics or results exist. IBM AML data files are present locally but have not been independently validated. |
+
+Dataset discovery and ingestion are infrastructure work and **do not**
+constitute experimental validation of HITL 2.0.
 
 ## Explicit non-goals for this iteration
 

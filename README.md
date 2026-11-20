@@ -4,8 +4,8 @@
 Framework for Secure and Auditable Agentic AI.**
 
 > **Status:** Early-stage academic research prototype. This repository contains
-> project scaffolding, typed interface *placeholders* and tests only. **No
-> governance mechanisms are implemented.** See
+> project scaffolding, typed interface *placeholders*, local dataset ingestion
+> infrastructure and tests. **No governance mechanisms are implemented.** See
 > [`docs/research/research-status.md`](docs/research/research-status.md).
 
 ## Research motivation
@@ -70,7 +70,10 @@ such claim is made.
 | Autonomy level (L0–L4) selection logic | Not implemented; unresolved |
 | Policy engine and constraint composition | Not implemented; unresolved |
 | Audit integrity mechanism | Not implemented; unresolved |
-| Experiments, datasets, results | None |
+| Dataset ingestion infrastructure (`src/hitl2/data/`) | Implemented; tested with small fixtures |
+| IBM AML dataset files | 18 CSV/TXT files present locally; source revision and retrieval date unverified |
+| IEEE-CIS data | Not downloaded; authentication and rule acceptance required |
+| Experiments, results | None |
 
 ## Repository layout
 
@@ -84,7 +87,10 @@ src/hitl2/
   human_oversight/      # human oversight boundary (namespace only)
   audit/                # audit boundary (namespace only)
   api/                  # reserved for a future transport layer
-tests/                  # import + placeholder instantiation tests
+  data/                 # dataset discovery, loaders, validation, preprocessing
+tests/                  # import, placeholder and data-infrastructure tests
+data/                   # local-only datasets + version-controlled provenance
+scripts/                # guarded IEEE-CIS download helper
 docs/research/          # research status register
 .github/workflows/      # CI: pytest + Ruff
 ```
@@ -122,6 +128,38 @@ uv run pytest
 
 CI uses these same uv commands against the committed `uv.lock`; keep the lock
 file synchronized with `pyproject.toml` via `uv lock` when dependencies change.
+
+## Dataset infrastructure (implemented; IBM AML files present)
+
+Provenance and checksums are documented in
+[`data/README.md`](data/README.md) and
+[`data/metadata/datasets.yaml`](data/metadata/datasets.yaml). Eighteen CSV/TXT
+IBM AML dataset files are present under `data/raw/ibm_aml/`. The user reports
+obtaining them directly from the IBM repository; their exact source revision
+and retrieval date are **unverified**. The commit
+`366436e605ac7713bf4eee8b4fbc45984d64427c` recorded in the provenance file
+applies only to the earlier documentation-only repository snapshot (`LICENSE`
+and `README.md`), **not** to these dataset files.
+
+The upstream README identifies the data licence as **CDLA-Sharing-1.0**,
+distinct from the repository's Apache-2.0 software licence. Dataset schema,
+dimensions, labels and column semantics have **not** been independently
+validated.
+
+`hitl2.data` provides format-agnostic discovery, streaming CSV/TSV chunk
+loaders, schema/missing-value/type validation, checksum helpers, and
+reproducible preprocessing into `data/processed/` with a manifest. No column
+names, features or thresholds are hard-coded. All dataset directories are
+git-ignored.
+
+IEEE-CIS is **preparation only**. Install the CLI with
+`uv tool install kaggle --with six`; see
+[`scripts/download_ieee_cis.sh`](scripts/download_ieee_cis.sh) for the guarded
+command. Downloading requires the user to authenticate and accept the
+competition rules. No download was performed and no credentials are stored.
+
+Dataset ingestion is infrastructure work, **not** experimental validation of
+HITL 2.0.
 
 ## Research governance note
 

@@ -24,3 +24,28 @@ htmlcov/
 .idea/
 .vscode/
 .DS_Store
+
+# Research datasets: raw, derived and split data must stay local
+data/raw/
+data/interim/
+data/processed/
+data/splits/
+
+# Downloaded dataset archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.7z
+*.rar
+
+# Kaggle credentials (never commit)
+.kaggle/
+kaggle.json
+
+# Local secrets / environment files
+.env
+.env.*
+*.env
+!.env.example

@@ -14,6 +14,12 @@ MODULE_NAMES = (
     "hitl2.human_oversight",
     "hitl2.audit",
     "hitl2.api",
+    "hitl2.data",
+    "hitl2.data.discovery",
+    "hitl2.data.loaders",
+    "hitl2.data.validators",
+    "hitl2.data.preprocessing",
+    "hitl2.data.metadata",
 )
 
 
