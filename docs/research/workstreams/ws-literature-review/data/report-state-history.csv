@@ -1,0 +1,1 @@
+history_id,report_id,event_type,from_state,to_state,transition_date_utc,actor,requested_by,request_date_utc,authorised_by,authorisation_date_utc,authorisation_expires_at_utc,authorisation_history_id,request_status,exception_type,justification,reason_code,replaces_history_id,correction_of,evidence_note,prisma_snapshot_id,notes

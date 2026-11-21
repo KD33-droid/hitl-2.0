@@ -1,0 +1,1 @@
+record_id,lit_id,source_database,search_id,raw_title,raw_authors,raw_year,abstract_text,abstract_source,abstract_retrieved_at_utc,abstract_provenance_status,dedupe_group_id,pass1_decision,pass1_reason_code,pass1_date,pass2_decision,pass2_reason_code,pass2_date,full_text_access,access_flag,final_status,final_exclusion_code,reviewer,notes
